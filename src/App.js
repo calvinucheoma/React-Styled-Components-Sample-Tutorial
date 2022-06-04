@@ -1,25 +1,49 @@
-import logo from './logo.svg';
 import './App.css';
+import StyledButton, {FancyButton, SubmitButton, DarkButton, LightButton} from './styled components/Button/Button';
+import {ThemeProvider, createGlobalStyle} from 'styled-components';
 
 function App() {
+
+  const theme= {
+    dark: {
+      primary: '#000',
+      text: '#fff'
+    },
+    light: {
+      primary: '#fff',
+      text: '#000',
+    },
+    fontFamily: 'Segoe UI',
+  };
+
+  const GlobalStyle = createGlobalStyle`
+    button {
+      font-family: ${(props) => props.theme.fontFamily};
+    }
+  `;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    <ThemeProvider theme={theme}>
+    <GlobalStyle/>
+
+    <div>
+
+      <StyledButton> Button </StyledButton>
+      <StyledButton variant='outline'> Button </StyledButton>
+      <FancyButton as='a'>Button</FancyButton> {/*changes the element in the browser now to an <a> tag instead of a <button> tag like the others */}
+      <SubmitButton> Button </SubmitButton>
+      {/* <AnimatedLogo src={logo}/> */}
+      <DarkButton>Button</DarkButton>
+      <LightButton>Button</LightButton>
+
     </div>
+
+  </ThemeProvider>
+
   );
-}
+
+};
+
 
 export default App;
